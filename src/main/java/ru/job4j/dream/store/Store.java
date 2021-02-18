@@ -5,10 +5,14 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.Candidate;
 
 public class Store {
+
+    private static AtomicInteger postid = new AtomicInteger(4);
 
     private static final Store INST = new Store();
 
@@ -23,6 +27,11 @@ public class Store {
         candidates.put(1, new Candidate(1, "Junior Java"));
         candidates.put(2, new Candidate(2, "Middle Java"));
         candidates.put(3, new Candidate(3, "Senior Java"));
+    }
+
+    public void save(Post post) {
+        post.setId(postid.incrementAndGet());
+        posts.put(post.getId(), post);
     }
 
     public static Store instOf() {

@@ -2,6 +2,7 @@ package ru.job4j.dream.model;
 
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Post {
     private int id;
