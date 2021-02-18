@@ -34,6 +34,11 @@ public class Store {
         posts.put(post.getId(), post);
     }
 
+    public void save(Candidate candidate) {
+        candidate.setId(postid.incrementAndGet());
+        candidates.put(candidate.getId(), candidate);
+    }
+
     public static Store instOf() {
         return INST;
     }
