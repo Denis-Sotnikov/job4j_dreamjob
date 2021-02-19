@@ -12,7 +12,8 @@ import ru.job4j.dream.model.Candidate;
 
 public class Store {
 
-    private static AtomicInteger postid = new AtomicInteger(4);
+    private static AtomicInteger postid = new AtomicInteger(3);
+    private static AtomicInteger canid = new AtomicInteger(3);
 
     private static final Store INST = new Store();
 
@@ -47,7 +48,7 @@ public class Store {
 
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
-            candidate.setId(postid.incrementAndGet());
+            candidate.setId(canid.incrementAndGet());
         }
         candidates.put(candidate.getId(), candidate);
     }
