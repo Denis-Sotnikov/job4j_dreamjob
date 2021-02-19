@@ -10,12 +10,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.Candidate;
 
-public class MemStore {
+public class MemStore implements Store {
 
     private static AtomicInteger postid = new AtomicInteger(3);
     private static AtomicInteger canid = new AtomicInteger(3);
 
-    private static final MemStore INST = new MemStore();
+    //private static final PsqlStore INST = new PsqlStore();
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
@@ -52,11 +52,11 @@ public class MemStore {
         }
         candidates.put(candidate.getId(), candidate);
     }
-
-    public static MemStore instOf() {
+/*
+    public static PsqlStore instOf() {
         return INST;
     }
-
+*/
     public Collection<Post> findAllPosts() {
         return posts.values();
     }
