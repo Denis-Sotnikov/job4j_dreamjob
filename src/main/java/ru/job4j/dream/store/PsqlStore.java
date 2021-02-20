@@ -65,7 +65,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return posts;
     }
@@ -82,7 +82,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return candidates;
     }
@@ -116,7 +116,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return post;
     }
@@ -134,7 +134,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return candidate;
     }
@@ -181,7 +181,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return post;
     }
@@ -199,7 +199,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return candidate;
     }
@@ -224,7 +224,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return photoId;
     }
@@ -241,7 +241,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return photoId;
     }
@@ -260,7 +260,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.info("info message");
+            LOG.info("info message", e);
         }
         return photoName;
     }
