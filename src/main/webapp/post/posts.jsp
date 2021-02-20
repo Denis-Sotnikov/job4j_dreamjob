@@ -2,6 +2,7 @@
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="ru.job4j.dream.model.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
@@ -23,10 +24,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Работа мечты</title>
 </head>
+<%
+    User userMain = new User();
+    HttpSession sc = request.getSession();
+    if (sc.getAttribute("user") != null) {
+        userMain = (User) sc.getAttribute("user");
+    }
+%>
 <body>
 <div class="container pt-3">
-
     <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="<%=userMain.getName()%>"/> | Выйти</a>
+            </li>
+        </ul>
+    </div>
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Вакансии

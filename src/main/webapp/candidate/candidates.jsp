@@ -1,3 +1,4 @@
+<%@ page import="ru.job4j.dream.model.User" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
@@ -26,8 +27,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Работа мечты</title>
 </head>
+<%
+    User userMain = new User();
+    HttpSession sc = request.getSession();
+    if (sc.getAttribute("user") != null) {
+        userMain = (User) sc.getAttribute("user");
+    }
+%>
 <body>
 <div class="container pt-3">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="<%=userMain.getName()%>"/> | Выйти</a>
+            </li>
+        </ul>
+    </div>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">

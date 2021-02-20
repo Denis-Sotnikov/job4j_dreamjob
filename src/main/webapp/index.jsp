@@ -1,6 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
+<%@ page import="ru.job4j.dream.model.User" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,6 +23,13 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<%
+    User userMain = new User();
+    HttpSession sc = request.getSession();
+    if (sc.getAttribute("user") != null) {
+        userMain = (User) sc.getAttribute("user");
+    }
+%>
 <div class="container">
     <div class="row">
         <ul class="nav">
@@ -38,6 +47,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="<%=userMain.getName()%>"/> | Выйти</a>
             </li>
         </ul>
     </div>

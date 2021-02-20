@@ -1,6 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
+<%@ page import="ru.job4j.dream.model.User" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,9 +22,22 @@
 
     <title>Работа мечты</title>
 </head>
+<%
+    User userMain = new User();
+    HttpSession sc = request.getSession();
+    if (sc.getAttribute("user") != null) {
+        userMain = (User) sc.getAttribute("user");
+    }
+%>
 <body>
 <div class="container pt-3">
-
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> <c:out value="<%=userMain.getName()%>"/> | Выйти</a>
+            </li>
+        </ul>
+    </div>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -38,6 +53,12 @@
                         <label>Пароль</label>
                         <input type="text" class="form-control" name="password">
                     </div>
+
+                        <% if (request.getAttribute("error") != null) { %>
+                        <div>
+                            <label><%=request.getAttribute("error")%></label>
+                        </div>
+                        <% } %>
                     <button type="submit" class="btn btn-primary">Войти</button>
                 </form>
             </div>
