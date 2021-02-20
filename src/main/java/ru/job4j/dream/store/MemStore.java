@@ -15,7 +15,7 @@ public class MemStore implements Store {
     private static AtomicInteger postid = new AtomicInteger(3);
     private static AtomicInteger canid = new AtomicInteger(3);
 
-    //private static final PsqlStore INST = new PsqlStore();
+    private static final Store INST = new MemStore();
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
