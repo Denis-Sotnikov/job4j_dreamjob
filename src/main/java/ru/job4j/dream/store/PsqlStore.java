@@ -1,6 +1,8 @@
 package ru.job4j.dream.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
 
@@ -17,6 +19,7 @@ import java.util.Properties;
 
 public class PsqlStore implements Store {
 
+    private static final Logger LOG = LogManager.getLogger(PsqlStore.class.getName());
     private final BasicDataSource pool = new BasicDataSource();
 
     private PsqlStore() {
@@ -62,7 +65,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return posts;
     }
@@ -79,7 +82,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return candidates;
     }
@@ -113,7 +116,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return post;
     }
@@ -131,12 +134,13 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return candidate;
     }
 
-    private void update(Post post) {
+    @Override
+    public void update(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("UPDATE post set name=? where id = ?", PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
@@ -148,7 +152,8 @@ public class PsqlStore implements Store {
         }
     }
 
-    private void update(Candidate candidate) {
+    @Override
+    public void update(Candidate candidate) {
         System.out.println("here");
 
         try (Connection cn = pool.getConnection();
@@ -176,11 +181,12 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return post;
     }
 
+    @Override
     public Candidate findCandidateById(int id) {
         Candidate candidate = null;
         try (Connection cn = pool.getConnection();
@@ -193,11 +199,12 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return candidate;
     }
 
+    @Override
     public String incrementAndGetIdForPhoto(String s) {
         String photoId = null;
         try (Connection cn = pool.getConnection();
@@ -217,11 +224,12 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return photoId;
     }
 
+    @Override
     public String getIdForPhoto() {
         String photoId = null;
         try (Connection cn = pool.getConnection();
@@ -233,7 +241,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return photoId;
     }
@@ -252,7 +260,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.info("info message");
         }
         return photoName;
     }

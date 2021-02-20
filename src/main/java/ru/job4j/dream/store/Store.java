@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.servlet.CandidateServlet;
 
 import java.util.Collection;
 
@@ -17,6 +18,10 @@ public interface Store {
     Post findById(int id);
 
     Candidate findCandidateById(int id);
+
+    void update(Post post);
+
+    void update(Candidate candidate);
 
     String incrementAndGetIdForPhoto(String s);
 
