@@ -39,4 +39,6 @@ public interface Store {
     void save(User user);
 
     void update(User user);
+
+    User findUserByEmail(String s);
 }

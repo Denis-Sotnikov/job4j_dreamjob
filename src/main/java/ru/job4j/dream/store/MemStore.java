@@ -97,6 +97,11 @@ public class MemStore implements Store {
 
     }
 
+    @Override
+    public User findUserByEmail(String s) {
+        return null;
+    }
+
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             candidate.setId(canid.incrementAndGet());
