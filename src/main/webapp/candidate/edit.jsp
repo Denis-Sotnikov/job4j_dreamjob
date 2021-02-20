@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
@@ -52,7 +53,18 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
+
+                <h2>Upload image</h2>
+                <form action="<c:url value='/upload'/>" method="post" enctype="multipart/form-data">
+                    <div class="checkbox">
+                        <input type="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             </div>
+
+
+
         </div>
     </div>
 </div>

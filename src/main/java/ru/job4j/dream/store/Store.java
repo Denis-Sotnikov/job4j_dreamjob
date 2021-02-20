@@ -17,4 +17,12 @@ public interface Store {
     Post findById(int id);
 
     Candidate findCandidateById(int id);
+
+    String incrementAndGetIdForPhoto(String s);
+
+    String getIdForPhoto();
+
+    String getPhotoFromStore();
+
+    void delete(int id);
 }

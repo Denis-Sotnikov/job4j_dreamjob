@@ -75,7 +75,7 @@ public class PsqlStore implements Store {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    candidates.add(new Candidate(it.getInt("id"), it.getString("name")));
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name"), it.getString("photoId")));
                 }
             }
         } catch (Exception e) {
@@ -120,9 +120,10 @@ public class PsqlStore implements Store {
 
     private Candidate create(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name, photoId) VALUES (?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
+            ps.setString(2, candidate.getPhotoId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -137,10 +138,10 @@ public class PsqlStore implements Store {
 
     private void update(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO post(name) VALUES (?) where id = ?", PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps = cn.prepareStatement("UPDATE post set name=? where id = ?", PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
-            ps.setInt(1, post.getId());
+            ps.setInt(2, post.getId());
             ps.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -148,11 +149,14 @@ public class PsqlStore implements Store {
     }
 
     private void update(Candidate candidate) {
+        System.out.println("here");
+
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name) VALUES (?) where id = ?", PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps = cn.prepareStatement("UPDATE candidate set name=? where id = ?")
         ) {
             ps.setString(1, candidate.getName());
-            ps.setInt(1, candidate.getId());
+            //ps.setString(2, candidate.getPhotoId());
+            ps.setInt(2, candidate.getId());
             ps.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -185,12 +189,87 @@ public class PsqlStore implements Store {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    candidate = new Candidate(it.getInt("id"), it.getString("name"));
+                    candidate = new Candidate(it.getInt("id"), it.getString("name"), it.getString("photoId"));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return candidate;
+    }
+
+    public String incrementAndGetIdForPhoto(String s) {
+        String photoId = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO photo(name) VALUES (?)", PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, s);
+            ps.execute();
+            } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from photo where id = (select max(id) from photo)", PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    photoId = it.getString("id");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return photoId;
+    }
+
+    public String getIdForPhoto() {
+        String photoId = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from photo where id = (select max(id) from photo)", PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    photoId = it.getString("id");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return photoId;
+    }
+
+    @Override
+    public String getPhotoFromStore() {
+        String photoName = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from photo where id = (select max(id) from photo)", PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    System.out.println(it.getString("id"));
+                    System.out.println(it.getString("name"));
+                    photoName = it.getString("id") + "." + it.getString("name").split("\\.")[it.getString("name").split("\\.").length - 1];
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return photoName;
+    }
+
+    @Override
+    public void delete(int id) {
+        System.out.println("here");
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("delete from candidate where id = ?");
+             PreparedStatement s = cn.prepareStatement("delete from photo where id = ?")
+        ) {
+            ps.setInt(1, id);
+            s.setInt(1, Integer.parseInt(findCandidateById(id).getPhotoId().split("\\.")[0]));
+            ps.execute();
+            s.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

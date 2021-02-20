@@ -46,6 +46,26 @@ public class MemStore implements Store {
         return candidates.get(id);
     }
 
+    @Override
+    public String incrementAndGetIdForPhoto(String s) {
+        return null;
+    }
+
+    @Override
+    public String getIdForPhoto() {
+        return null;
+    }
+
+    @Override
+    public String getPhotoFromStore() {
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             candidate.setId(canid.incrementAndGet());
