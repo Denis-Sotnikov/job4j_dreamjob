@@ -47,6 +47,16 @@ public class MemStore implements Store {
     }
 
     @Override
+    public void update(Post post) {
+
+    }
+
+    @Override
+    public void update(Candidate candidate) {
+
+    }
+
+    @Override
     public String incrementAndGetIdForPhoto(String s) {
         return null;
     }
