@@ -14,4 +14,11 @@ CREATE TABLE photo (
     name text
 );
 
+CREATE TABLE userForSite (
+    id SERIAL PRIMARY KEY,
+    name text,
+    email text,
+    password text
+);
+
 

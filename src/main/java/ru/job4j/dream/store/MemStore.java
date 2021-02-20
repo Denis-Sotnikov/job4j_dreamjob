@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.User;
 
 public class MemStore implements Store {
 
@@ -76,6 +77,26 @@ public class MemStore implements Store {
 
     }
 
+    @Override
+    public User findUserById(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(User user) {
+
+    }
+
+    @Override
+    public void save(User user) {
+
+    }
+
+    @Override
+    public void update(User user) {
+
+    }
+
     public void save(Candidate candidate) {
         if (candidate.getId() == 0) {
             candidate.setId(canid.incrementAndGet());
@@ -94,4 +115,6 @@ public class MemStore implements Store {
     public Collection<Candidate> findAllCandidates() {
         return candidates.values();
     }
+
+
 }
