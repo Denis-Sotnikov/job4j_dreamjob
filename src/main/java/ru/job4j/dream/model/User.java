@@ -2,6 +2,8 @@ package ru.job4j.dream.model;
 
 
 import java.util.Objects;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 public class User {
     private int id;
