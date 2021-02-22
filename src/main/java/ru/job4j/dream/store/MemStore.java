@@ -108,11 +108,11 @@ public class MemStore implements Store {
         }
         candidates.put(candidate.getId(), candidate);
     }
-/*
-    public static PsqlStore instOf() {
+
+    public static Store instOf() {
         return INST;
     }
-*/
+
     public Collection<Post> findAllPosts() {
         return posts.values();
     }
