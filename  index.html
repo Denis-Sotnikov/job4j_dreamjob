@@ -28,6 +28,14 @@
             }
             return valid;
         }
+        function addRow() {
+            var name = $('#name').val();
+            var surname = $('#surname').val();
+            var sex = $('input[name=sex]:checked').val();
+            var description = $('#description').val();
+            $('#table tr:last').after('<tr><td>' + name +'</td><td>' + surname +'</td>' +
+                '<td>' + sex +'</td><td>' + description +'</td></tr>');
+        }
     </script>
 </head>
 <body>
@@ -58,35 +66,36 @@
             <label for="description">Описание:</label>
             <input type="description" class="form-control" id="description">
         </div>
-        <button type="submit" class="btn btn-default" onclick="return validate();">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="return validate();">Submit</button>
     </form>
 
-    <table class="table">
+    <table class="table" id="table">
         <thead>
         <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Sex</th>
+            <th>Description</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
+            <td>
+                Denis
+            </td>
+            <td>
+                Sotnikov
+            </td>
+            <td>
+                Male
+            </td>
+            <td>
+                Admin
+            </td>
         </tr>
         </tbody>
     </table>
+    <button type="button" class="btn btn-primary" onclick="addRow()">Add User</button>
 </div>
 </body>
 </html>
