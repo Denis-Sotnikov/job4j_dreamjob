@@ -21,4 +21,14 @@ CREATE TABLE userForSite (
     password text
 );
 
+CREATE TABLE IF NOT EXISTS city (
+   id SERIAL PRIMARY KEY,
+   name TEXT
+);
+
+INSERT INTO city(name) values ('Sankt-Peterburg');
+INSERT INTO city(name) values ('Smolensk');
+
+
+
 

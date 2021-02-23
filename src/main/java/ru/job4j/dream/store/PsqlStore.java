@@ -4,6 +4,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -13,10 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class PsqlStore implements Store {
 
@@ -371,5 +369,39 @@ public class PsqlStore implements Store {
         return user;
     }
 
+    @Override
+    public Collection<City> findAllCities() {
+        System.out.println("store");
+            List<City> citys = new ArrayList<>();
+            try (Connection cn = pool.getConnection();
+                 PreparedStatement ps = cn.prepareStatement("SELECT * FROM city")
+            ) {
+                try (ResultSet it = ps.executeQuery()) {
+                    while (it.next()) {
+                        citys.add(new City(it.getInt("id"), it.getString("name")));
+                    }
+                }
+            } catch (Exception e) {
+                LOG.info("info message", e);
+            }
+            return citys;
+    }
 
+    @Override
+    public Map<Integer, String> findAllCitiesMap() {
+        System.out.println("storeMap");
+        Map<Integer, String> citys = new HashMap();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM city")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    citys.put(it.getInt("id"), it.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            LOG.info("info message", e);
+        }
+        return citys;
+    }
 }

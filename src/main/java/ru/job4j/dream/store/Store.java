@@ -1,11 +1,13 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 import ru.job4j.dream.servlet.CandidateServlet;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface Store {
     Collection<Post> findAllPosts();
@@ -41,4 +43,8 @@ public interface Store {
     void update(User user);
 
     User findUserByEmail(String s);
+
+    Collection<City> findAllCities();
+
+    Map<Integer, String> findAllCitiesMap();
 }

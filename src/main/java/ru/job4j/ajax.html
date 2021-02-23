@@ -18,7 +18,7 @@
             data: 'name=' + $('#exampleInputEmail1').val(),
             dataType: 'text'
         }).done(function(data) {
-            alert(data);
+            $("h1").text(data);
         }).fail(function(err){
             alert(err);
         });

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.User;
@@ -99,6 +100,16 @@ public class MemStore implements Store {
 
     @Override
     public User findUserByEmail(String s) {
+        return null;
+    }
+
+    @Override
+    public Collection<City> findAllCities() {
+        return null;
+    }
+
+    @Override
+    public Map<Integer, String> findAllCitiesMap() {
         return null;
     }
 
