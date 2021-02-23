@@ -29,12 +29,14 @@
             return valid;
         }
         function addRow() {
-            var name = $('#name').val();
-            var surname = $('#surname').val();
-            var sex = $('input[name=sex]:checked').val();
-            var description = $('#description').val();
-            $('#table tr:last').after('<tr><td>' + name +'</td><td>' + surname +'</td>' +
-                '<td>' + sex +'</td><td>' + description +'</td></tr>');
+            if (validate()) {
+                var name = $('#name').val();
+                var surname = $('#surname').val();
+                var sex = $('input[name=sex]:checked').val();
+                var description = $('#description').val();
+                $('#table tr:last').after('<tr><td>' + name +'</td><td>' + surname +'</td>' +
+                    '<td>' + sex +'</td><td>' + description +'</td></tr>');
+            }
         }
     </script>
 </head>
