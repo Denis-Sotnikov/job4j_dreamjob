@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            valid = true;
+            if ($('#name').val() === '') {
+                alert("Input name");
+                valid = false;
+            }
+            if ($('#surname').val() === '') {
+                alert("Input surname");
+                valid = false;
+            }
+            if ($('input[name=sex]:checked').length < 1) {
+                alert("Choose sex");
+                valid = false;
+            }
+            if ($('#description').val() === '') {
+                alert("Write description");
+                valid = false;
+            }
+            return valid;
+        }
+    </script>
 </head>
 <body>
 
@@ -25,17 +47,18 @@
         </div>
 
         <div class="form-group">
-            <label for="sex">Пол</label>
-            <input type="sex" class="form-control" id="sex">
+            <label>Sex:</label>
+            </br>
+            <label>
+                <input type="radio" name="sex" id="male" value="Male"> Male
+                <input type="radio" name="sex" id="female" value="Female"> Female
+            </label>
         </div>
         <div class="form-group">
             <label for="description">Описание:</label>
             <input type="description" class="form-control" id="description">
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" onclick="return validate();">Submit</button>
     </form>
 
     <table class="table">
@@ -65,8 +88,5 @@
         </tbody>
     </table>
 </div>
-
-
-
 </body>
 </html>
