@@ -16,6 +16,7 @@ public class GreetingServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        System.out.println(name);
         writer.println("Nice to meet you, " + name);
         writer.flush();
     }
