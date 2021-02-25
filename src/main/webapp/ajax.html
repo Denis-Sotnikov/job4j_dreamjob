@@ -15,20 +15,21 @@
         $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/dreamjob/greet',
-            data: 'name=' + $('#exampleInputEmail1').val(),
-            dataType: 'text'
-        }).done(function(data) {
-            alert(data);
-        }).fail(function(err){
+            data: {name: $('#exampleInputEmail1').val()},
+            dataType: 'json'
+        }).done(function (data) {
+            $('#emailForm div:first').before(`<p>` + JSON.stringify(data) + `</p>`);
+        }).fail(function (err) {
             alert(err);
         });
     }
 </script>
 
 <div class="container">
-    <form>
+    <form id="emailForm">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
+            <a id="prosto"></a>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
         <button type="button" class="btn btn-primary" onclick="sendGreeting()">Submit</button>
