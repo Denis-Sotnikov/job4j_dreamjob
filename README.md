@@ -10,9 +10,11 @@ Technologies:<br>
  - mockito with PowerMock for test cases;<br>
  - OOP;<br>
  - maven as a build system.<br>
+ 
+ 
 This application demonstrates a simple job placement and resume service for job search and candidate search<br>
 
-Interface in my Application
+Interface<br>
 ![ScreenShot](images/1.png)
 
 ![ScreenShot](images/2.png)
